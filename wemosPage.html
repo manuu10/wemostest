@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8www" />
+    <title>YEEEHHAAAA</title>
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EastDesire/jscolor@master/jscolor.js"></script>
+    <link rel="icon" href="https://openclipart.org/image/2400px/svg_to_png/229826/Colorful-Shutter-Icon.png">
+    <h1>LED Control</h1>
+</head>
+<body>   
+    <div class="grid-container">
+      <div class="section-pat section">
+        <p class="cfgButtton" onclick="changePattern(0)">Regenbogen</p><br>
+        <p class="cfgButtton" onclick="changePattern(1)">Modus 1</p><br>
+        <p class="cfgButtton" onclick="changePattern(2)">Modus 2</p><br>
+        <p class="cfgButtton" onclick="changePattern(3)">Modus 3</p>
+      </div>
+
+      <div class="section-col section">
+        <p>Color: <span id="curColor"></span></p>
+        <input value="002078" class="jscolor {width:400, height:300, borderColor:'#666', position:'center', insetColor:'#000', backgroundColor:'#333',mode:'HVS', hash:true}" onchange="setColor(this.value)" readonly>
+      </div>
+
+      <div class="section-cfg section">
+        <p>Helligkeit: <span id="brightPos"></span></p>
+        <input type="range" min="0" max="255" class="slider" id="brightSlider" onchange="brightness(this.value)"/>
+        <p>LEDS: <span id="numLEDStext">9</span></p>
+        <input type="text" id="numLEDSset">
+        <button onclick="setNumLeds();">set</button>
+      </div>
+    </div>
+</body>
+
+<script>
+    var slider = document.getElementById("brightSlider");
+    var brightP = document.getElementById("brightPos");
+    brightP.innerHTML = slider.value;
+    slider.oninput = function() {
+      slider.value = this.value;
+      brightP.innerHTML = this.value;
+    }
+    $.ajaxSetup({timeout:1000});
+    function brightness(pos) {
+      $.get("/?brightness=" + pos + "&");
+      {Connection: close};
+    }
+    function setColor(color) {
+      document.getElementById("curColor").innerHTML = color;
+      $.get("/?hexColorCode=" + color + "&");
+      {Connection: close};
+    }
+    function changePattern(pattern){
+      $.get("/?Pattern=" + pattern + "&");
+      {Connection: close};
+    }
+    function setNumLeds(){
+      var leds = document.getElementById("numLEDSset").value;
+      document.getElementById("numLEDStext").innerHTML = leds;
+      $.get("/?numLEDS=" + numleds + "&");
+      {Connection: close};
+    }
+</script>
+<script>
+
+</script>
+</html>
+
+
